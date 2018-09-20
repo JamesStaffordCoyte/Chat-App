@@ -8,19 +8,15 @@ socket.on('connect', function () {
 
 // listens for a new message
 socket.on('newMessage', function(message) {
-  console.log('Received message', message);
+  let li = $('<li></li>');
+  li.text(`${message.from}: ${message.text}`);
+  console.log(li);
+  $('#messages').append(li);
 });
 
 // disconnection event listener
 socket.on('disconnect', function() {
   console.log('Disconnected to server');
-});
-
-socket.emit('createMessage', {
-  from: 'Frank',
-  text: 'Hi'
-}, function(data) {
-  console.log('Got it!', data);
 });
 
 // onSubmit
