@@ -16,6 +16,17 @@ var io = socketIO(server);
 // Register an on connection event listener
 io.on('connection', (socket) => {
   console.log('new user connected');
+
+  socket.emit('newMessage', {
+    from: 'user',
+    text: 'textHere',
+    createdAt: 123
+  });
+
+  socket.on('createMessage', (message) => {
+    console.log('created message', message);
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected')
   });
