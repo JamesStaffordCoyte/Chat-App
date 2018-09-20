@@ -1,7 +1,4 @@
 /* Root Node application */
-
-
-
 const path = require('path');
 const http = require('http');
 const express = require('express');
@@ -29,10 +26,11 @@ io.on('connection', (socket) => {
 
 
   // listens for a created message
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, callback) => {
     console.log('created message', message);
     // emits event to all connections
     io.emit('newMessage', generateMessage(message.from, message.text));
+    callback('This is from the server');
     // socket.broadcast.emit('newMessage', {
     //   from: message.from,
     //   text: message.text,
